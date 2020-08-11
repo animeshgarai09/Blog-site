@@ -1,0 +1,180 @@
+.background {
+    height: calc(100vh - 92px);
+    background: url(../images/back.png);
+    background-size: 45%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.block {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.block h1 {
+    font-size: 48px;
+    font-weight: 600;
+    color: #403866;
+}
+
+.block.right p {
+    width: 390px;
+    float: right;
+    text-align: right;
+    padding: 20px;
+    font-size: 17px;
+    color: #949494;
+}
+
+.block.left p {
+    width: 400px;
+    padding: 20px;
+    font-size: 17px;
+    color: #949494;
+}
+
+.right {
+    right: 90px;
+    align-items: flex-end;
+}
+
+.right .arrow {
+    position: absolute;
+    left: -75px;
+    top: 70px;
+    width: 160px;
+}
+
+.plane {
+    position: absolute;
+    width: 180px;
+    bottom: -93px;
+    left: 99px;
+}
+
+.left .arrow {
+    position: absolute;
+    right: -142px;
+    width: 200px;
+    top: 60px;
+}
+
+.left {
+    left: 90px;
+    bottom: 50px;
+}
+
+.web {
+    position: absolute;
+    width: 216px;
+    top: -270px;
+    left: -25px;
+    transform: rotate(45deg);
+}
+
+.wifi {
+    position: absolute;
+    width: 150px;
+    top: -120px;
+    right: 74px;
+    transform: rotate(-90deg);
+}
+
+.mail {
+    position: absolute;
+    bottom: -200px;
+    width: 220px;
+    transform: rotate(45deg);
+}
+
+button.start {
+    width: 17rem;
+    height: 4rem;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    margin: 20px;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+button.start .circle {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 4rem;
+    height: 4rem;
+    background: #827ffe;
+    border-radius: 2.625rem;
+}
+
+button.start .circle .icon {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+}
+
+button.start .circle .icon.arrow {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+button.start .circle .icon.arrow::before {
+    position: absolute;
+    content: '';
+    top: -0.3rem;
+    right: -0.5rem;
+    width: 0.825rem;
+    height: 0.825rem;
+    border-top: 0.2rem solid #fff;
+    border-right: 0.2rem solid #fff;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+button.start .button-text {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #827ffe;
+    font-size: 16px;
+    line-height: 1.4em;
+    text-align: center;
+}
+
+button:hover .circle {
+    width: 100%;
+}
+
+button:hover .circle .icon.arrow {
+    background: #fff;
+    -webkit-transform: translate(1rem, 0);
+    transform: translate(1rem, 0);
+}
+
+button:hover .button-text {
+    color: #fff;
+}

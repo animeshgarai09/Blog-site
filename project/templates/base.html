@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}"> {% block links%} {% endblock %}
+</head>
+
+<body>
+    <div id="main">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{url_for('core.index')}}"><span id="open" class="glyphicon glyphicon-th-large"></span
+              >Blog IT</a
+            >
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_authenticated %}
+                    <li><a href="{{url_for('blogpost.createpost')}}" class="create"><i class="fa fa-plus" aria-hidden="true"></i>Create Post</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="dp-con" style="background: url({{url_for('static',filename='images/profile_pic/'+current_user.profile_image)}})"></span> {{current_user.fullname.split(' ')[0]}}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url_for('user.profile',name=current_user.fullname,id=current_user.id)}}">Profile</a></li>
+                            <li><a id="logout" href="{{url_for('core.logout')}}">Log out</a></li>
+                        </ul>
+                    </li>
+
+                    {% else %}
+                    <li><a href="{{url_for('core.login')}}">Log In</a></li>
+                    <li><a href="{{url_for('core.signup')}}">Sign Up</a></li>
+                    {% endif %}
+                    </ul>
+                </div>
+        </nav>
+        {% block body%} {% endblock %}
+        </div>
+</body>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="{{url_for('static', filename='js/base.js')}}"></script>
+{% block javascript%} {% endblock %}
+
+</html>

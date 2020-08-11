@@ -1,0 +1,168 @@
+{% extends 'base.html'%} {% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/create-post.css')}}" />
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> {% endblock %} {% block body %}
+<div class="container">
+    <div class="form-con">
+        <form enctype="multipart/form-data">
+            {{form.hidden_tag()}}
+            <div class="image-con">
+                {% if title=='update' %}
+                <img src="{{url_for('static',filename='images/post_pic/'+pic)}}" alt="" width='100%'> {% else %}
+                <img src="{{url_for('static',filename='images/post_pic/default_blog_image.jpg')}}" alt="" width='100%'> {% endif %} {{form.picture()}}
+                <div class="options">
+                    <div>
+                        <span class="heading">
+                            {% if title=='update' %}
+                            Update Your blog
+                            {% else %}
+                            Write a blog
+                            {% endif %}
+                            
+                        </span>
+                        <span> Write brife about your experience to connect with audience</span>
+                    </div>
+                    <button id="file-pic"> <i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                    <div class="button-con">
+
+                        <button class="post" id='four' type='button'>
+                            <span class="circle" aria-hidden="true">
+                              <span class="icon arrow"></span>
+                            </span>
+                            <span class="button-text">Preview</span>
+                          </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-in">
+                <div class="wrap-input100">
+                    {{form.title()}}
+                </div>
+                <div class="wrap-input100">
+                    {{form.short()}}
+                </div>
+            </div>
+            <textarea id="summernote" name="editordata"></textarea>
+        </form>
+    </div>
+</div>
+<div id="modal-container">
+    <div class="modal-background">
+        <div class="modal">
+            <h2 id="pre-title"></h2>
+            <h4 id="pre-short"></h4>
+            <div class="content">
+
+            </div>
+            <div class="option-b">
+                <div class="author">
+                    <span class="dp" style="background: url({{url_for('static',filename='images/profile_pic/'+ current_user.profile_image)}})"></span>
+                    <span class='auth-text'>By {{current_user.fullname}}</span>
+                </div>
+                <div>
+                    <button type="button" class="btn cancle">Cancle</button>
+                    <button type="button" class="btn" id="submit-post">Submit Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block javascript%}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 135,
+        });
+
+        $('#summernote').summernote('code', `{{code | safe}}`);
+
+        $('.post').click(function() {
+            let title = $('#title').val()
+            let short = $('#short').val()
+            let editor = $("#summernote").summernote("code")
+            if (title && short && editor) {
+                var buttonId = $(this).attr('id');
+                $('#pre-title').html(title)
+                $('#pre-short').html(short)
+                $('.content').html(editor);
+                $('#modal-container').show();
+                $('#modal-container').removeAttr('class').addClass(buttonId);
+                $('body').addClass('modal-active');
+            }
+        })
+
+        $('#modal-container').click(function(e) {
+            if (e.target.className == "modal-background" || e.target.className == "btn cancle") {
+                $(this).addClass('out');
+                $('body').removeClass('modal-active');
+                $('#modal-container').delay(500).hide(0);
+            }
+        });
+
+
+        $("#file-pic").click(function(e) {
+            e.preventDefault();
+            $('#picture').trigger('click');
+        })
+
+
+
+        $('#submit-post').click(function(e) {
+            e.preventDefault();
+
+            "{% if title=='update' %}"
+            var url = "{{url_for('blogpost.update_post',title=form.title.data,id=id)}}";
+
+            "{% else%}"
+            var url = "{{url_for('blogpost.createpost')}}"; // send the form data here.
+
+            "{% endif %}"
+
+            var formd = new FormData($('form')[0])
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formd,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    $('#modal-container').addClass('message')
+                    $('.modal').append("<img id='loader' src='{{url_for('static',filename='images/loader.gif')}}'>")
+                },
+                success: function(data) {
+                    $('.modal').append("<img id='success' src='{{url_for('static',filename='images/success.gif')}}'>")
+                    setTimeout(function() {
+                        window.location.replace(data.data.redirect)
+                    }, 2000)
+                }
+            });
+        });
+
+        // Inject our CSRF token into our AJAX request.
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+                }
+            }
+        })
+
+
+        $('#picture').change(function() {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.image-con>img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    });
+</script>
+{% endblock %}

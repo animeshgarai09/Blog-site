@@ -1,0 +1,163 @@
+/*/ // ///////////////////////////////////////////////////////////////
+[FONT ]*/
+
+@font-face {
+    font-family: Ubuntu-Regular;
+    src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu-Bold;
+    src: url('../fonts/ubuntu/Ubuntu-Medium.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu-Bold;
+    src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+}
+
+html,
+body {
+    font-family: Ubuntu-Regular;
+}
+
+#main {
+    transition: margin-left 0.5s;
+}
+
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.21);
+    margin-bottom: 0;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+@media screen and(max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    background-color: #e6e6e6;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.input100 {
+    font-family: Ubuntu-Bold;
+    color: #403866;
+    line-height: 1.2;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    background: transparent;
+    height: 62px;
+    padding: 0 20px 0 38px;
+}
+
+input {
+    outline: none;
+    border: none;
+}
+
+a {
+    font-family: Ubuntu-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #403866;
+    font-weight: 600;
+    margin: 0;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #403866;
+}
+
+a:focus,
+a:hover {
+    color: #827ffe;
+}
+
+.navbar {
+    border-radius: 0 !important;
+}
+
+.main-con {
+    padding: 20px 0;
+}
+
+.navbar-nav>li>.dropdown-menu {
+    margin-top: 6px;
+    border-radius: 5px;
+    border: none;
+}
+
+.dp-con {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background: #111;
+    background-size: cover !important;
+}
+
+.navbar .dropdown-toggle {
+    padding: 13px 15px !important;
+    display: flex !important;
+    align-items: center;
+}
+
+.create {
+    background: #827ffe;
+    color: #fff;
+    margin-top: 7px;
+    border-radius: 5px;
+}
+
+.create i {
+    margin-right: 5px;
+}
+
+.navbar-nav>li>a.create {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.nav .open>a.dropdown-toggle,
+.nav .open>a.dropdown-toggle:focus,
+.nav .open>a.dropdown-toggle:hover {
+    background-color: unset;
+}
+
+.nav>li>a.dropdown-toggle:focus,
+.nav>li>a.dropdown-toggle:hover {
+    background-color: unset;
+}
+
+.error {
+    font-size: 10px;
+    background: #ff7979;
+    width: 100%;
+    display: block;
+    color: #fff;
+    text-align: center;
+}

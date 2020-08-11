@@ -1,0 +1,32 @@
+{% extends "base.html"%} {% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}" /> {% endblock links %} {% block body%}
+<div class="main-con">
+    <div class="container-fluid">
+        <div class="background">
+            <div class="right block">
+                <img src="../static/images/right.png" alt="" class="arrow">
+                <h1>Expand your reading.</h1>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium minima pariatur labore totam voluptatem ut a, repudiandae recusandae ab repellat temporibus, provident sint, ex aut impedit maxime </p>
+                <img src="../static/images/plane.png" alt="" class="plane">
+                <a href="{{url_for('core.signup')}}">
+                    <button class="start" type='button'>
+                    <span class="circle" aria-hidden="true">
+                      <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Get started</span>
+                </button>
+                </a>
+                <img src="../static/images/mail.png" alt="" class="mail">
+            </div>
+            <div class="left block">
+                <img src="../static/images/left.png" alt="" class="arrow">
+                <img src="../static/images/web.png" alt="" class="web">
+                <img src="../static/images/wifi.png" alt="" class="wifi">
+                <h1>Expand your mind.</h1>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium minima pariatur labore totam voluptatem ut a, repudiandae recusandae ab repellat temporibus, provident sint, ex aut impedit maxime </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

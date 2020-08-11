@@ -1,0 +1,193 @@
+{% extends 'base.html' %} {% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/profile.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dashboard.css')}}" /> {% endblock links %} {% block body %}
+<div class="container">
+    <div class="about-con">
+        <form enctype="multipart/form-data">
+            {{pic.hidden_tag()}} {% if user.id==current_user.id %}
+            <input type="file" name="picture" id="picture"> {% endif %}
+        </form>
+        {% if user.id==current_user.id %}
+        <span class="dp" style="background: url({{url_for('static',filename='images/profile_pic/'+ user.profile_image)}})">
+        <span class="ovarlay">
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+        {% else %}
+        <span class="dp" style="background: url({{url_for('static',filename='images/profile_pic/'+ user.profile_image)}})">
+        
+        {% endif %}    
+        </span>
+        </span>
+
+        <div class="details">
+            <span class="name">{{user.fullname}}</span>
+            <span class="mail">{{user.email}}</span>
+            <span class="time">Joined on {{user.date.strftime('%A, %B %e, %Y')}}</span>
+        </div>
+        <div class="sep">
+            <div class="count">
+                <span class="text">{{blog_posts.total}}</span>
+                <span>Posts</span>
+            </div>
+            {% if user.id==current_user.id %}
+            <button class="btn pass" id="four" type="button">Change Password</button> {% endif %}
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% if blog_posts.total> 0 %}
+    <div class="divider">
+        <span class="line"></span>
+        <span class="texts">
+            {% if user.id==current_user.id %}
+            Your blogs
+            {% else %}
+            Posted blogs
+            {% endif %}
+            
+        </span>
+    </div>
+    {% else %}
+    <div class="no_blog">
+        <h3>You haven't posted any blog yet</h3>
+    </div>
+    {% endif %}
+
+</div>
+<div class="container">
+    {% for row in blog_posts.items | batch(3)%}
+    <div class="row">
+        {% for post in row %}
+        <div class="col-md-4">
+            <div class="blog-card">
+                <div class="blog-image">
+                    {% if post.blog_image=='default_blog_image.jpg' %}
+                    <img src="{{url_for('static',filename='images/post_pic/'+post.blog_image)}}" style='transform:scale(2.4)' class="img-responsive" /> {% else %}
+                    <img src="{{url_for('static',filename='images/post_pic/'+post.blog_image)}}" class="img-responsive" /> {% endif %}
+                </div>
+                <div class="blog-details">
+                    <span class="date">{{post.date.strftime('%A, %B %e, %Y')}}</span>
+                    <a href="{{url_for('blogpost.blog_post',title=post.title,id=post.id)}}" class="blog-title">{{post.title}}</a>
+                    <p class="blog-des">
+                        {{post.short}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <div class="pagination-con">
+        <ul class="pagination justify-content-center">
+            {% for page_num in blog_posts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2)%} {% if blog_posts.total > 6 %} {% if page_num %} {% if blog_posts.page==page_num%}
+            <li class="page-item disabled">
+                <a class='page-link'>{{page_num}}</a>
+            </li>
+            {% else %}
+            <li class="page-item ">
+                <a class='page-link' href="{{url_for('user.profile',name=user.fullname,id=user.id,page=page_num)}}">{{page_num}}</a>
+            </li>
+
+            {% endif %} {% else%}
+            <li class="page-item ">
+                <a class='page-link disabled'>...</a>
+            </li>
+            {% endif %} {% endif %}{% endfor%}
+        </ul>
+    </div>
+</div>
+<div id="modal-container">
+    <div class="modal-background">
+        <div class="modal">
+            <div class="content">
+                <form id="changePass">
+                    {{passForm.hidden_tag()}}
+                    <div class="form-group">
+                        <label for="oldPassword">Old Password:</label> {{passForm.oldPassword()}}
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password:</label> {{passForm.newPassword()}}
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label> {{passForm.confirmPassword()}}
+                    </div>
+                </form>
+            </div>
+            <div class="option-b">
+                <button type="button" class="btn cancle">Cancle</button>
+                <a href=""><button type="button" class="btn" id="submit">Yes, Delete </button></a>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %} {% block javascript %}
+<script>
+    $(document).ready(function() {
+        $('.pass').click(function() {
+            var buttonId = $(this).attr('id');
+            $('#modal-container').show();
+            $('#modal-container').removeAttr('class').addClass(buttonId);
+            $('body').addClass('modal-active');
+        })
+
+        $('#modal-container').click(function(e) {
+            if (e.target.className == "modal-background" || e.target.className == "btn cancle") {
+                $('#changePass .form-control').val('')
+                $(this).addClass('out');
+                $('body').removeClass('modal-active');
+                $('#modal-container').delay(500).hide(0);
+            }
+
+        });
+
+
+        $(".dp").click(function(e) {
+            $("#picture").trigger('click')
+        })
+        $("#picture").change(function() {
+            pic = new FormData()
+            pic.append('picture', $(this)[0].files[0])
+            console.log('in')
+            console.log
+            $.ajax({
+                type: "POST",
+                url: "{{url_for('user.change_profile_image',id=current_user.id)}}",
+                data: pic,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data.data.link)
+                    $(".dp").css('background', "url(" + data.data.link + ")")
+                    $(".dp-con").css('background', "url(" + data.data.link + ")")
+                }
+            });
+            // Inject our CSRF token into our AJAX request.
+
+        });
+
+        $("#submit").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{{url_for('user.change_password',id=current_user.id)}}",
+                data: new FormData($('#changePass')[0]),
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data)
+                    if (data.data.messeges == 'success') {
+                        window.location.replace('/logout')
+                    }
+                }
+            });
+        });
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ pic.csrf_token._value() }}")
+                }
+            }
+        })
+    })
+</script>
+{% endblock javascript %}

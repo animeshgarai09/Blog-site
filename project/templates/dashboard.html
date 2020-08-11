@@ -1,0 +1,98 @@
+{% extends 'base.html'%} {% block links%}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dashboard.css')}}" /> {% endblock %} {% block body%}
+<div class="search-con">
+    <form>
+        <input type="text" class="form-control search-input" name="query">
+        <button id="submit" class="btn">Search</button>
+    </form>
+</div>
+<div class="container">
+    {% for row in blog_posts.items | batch(3)%}
+    <div class="row">
+        {% for post in row %}
+        <div class="col-md-4">
+            <div class="blog-card">
+                <div class="blog-image">
+                    {% if post.blog_image=='default_blog_image.jpg' %}
+                    <img src="{{url_for('static',filename='images/post_pic/'+post.blog_image)}}" style='transform:scale(2.4)' class="img-responsive" /> {% else %}
+                    <img src="{{url_for('static',filename='images/post_pic/'+post.blog_image)}}" class="img-responsive" /> {% endif %}
+                </div>
+                <div class="blog-details">
+                    <span class="date">{{post.date.strftime('%A, %B %e, %Y')}}</span>
+                    <a href="{{url_for('blogpost.blog_post',title=post.title,id=post.id)}}" class="blog-title">{{post.title}}</a>
+                    <p class="blog-des">
+                        {{post.short}}
+                    </p>
+                </div>
+                <div class="blog-author">
+                    <div class="author">
+                        <img src="{{url_for('static', filename='images/profile_pic/'+post.author.profile_image)}}" alt="" /> By
+                        <a href="{{url_for('user.profile',name=post.author.fullname,id=post.author.id)}}">{{post.author.fullname}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <div class="pagination-con">
+        <ul class="pagination justify-content-center">
+            {% for page_num in blog_posts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2)%} {% if blog_posts.total > 6 %} {% if page_num %} {% if blog_posts.page==page_num%}
+            <li class="page-item disabled">
+                <a class='page-link'>{{page_num}}</a>
+            </li>
+            {% else %}
+            <li class="page-item ">
+                <a class='page-link' href="{{url_for('user.dashboard',page=page_num)}}">{{page_num}}</a>
+            </li>
+
+            {% endif %} {% else%}
+            <li class="page-item ">
+                <a class='page-link disabled'>...</a>
+            </li>
+            {% endif %} {% endif %}{% endfor%}
+        </ul>
+    </div>
+    <!-- https://cors-anywhere.herokuapp.com/http://blog-it-282707.el.r.appspot.com/transfer-data -->
+</div>
+{% endblock %} {% block javascript %}
+<script>
+    $("#submit").click(function(e) {
+        e.preventDefault();
+        json = {
+            responseCode: 220,
+            responseMessage: 'Sucess',
+            orgid: 325,
+            responseDataArray: [{
+                resource_id: 1664,
+                cctv_id: null,
+                url: null,
+                recordfilepath: [
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-17/cam_1664_301-1592373881000.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-17/cam_1664_301-1592373955000.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-17/cam_1664_301-1592374028000.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-17/cam_1664_301-1592402646.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-18/cam_1664_301-1592463754.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-18/cam_1664_301-1592464054.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-18/cam_1664_301-1592464327.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-18/cam_1664_301-1592464627.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-18/cam_1664_301-1592468745.flv',
+                    '/ionstore/hv3/g01/pri/301/tcsionlivestreamingfw/CCTVFiles/1664/2020-06-22/cam_1664_301-1592806090.flv'
+                ]
+            }]
+        }
+        $.ajax({
+            type: "POST",
+            url: "https://cors-anywhere.herokuapp.com/http://127.0.0.1:8080/transfer-data",
+            data: JSON.stringify(json),
+            processData: false,
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(data) {
+                console.log('success')
+                console.log(data)
+            }
+        });
+    });
+</script>
+{% endblock javascript %}

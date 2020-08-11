@@ -1,0 +1,253 @@
+html.modal-active,
+body.modal-active {
+    overflow: hidden;
+}
+
+.about-con {
+    margin: 30px 0;
+    border-radius: 10px;
+    background: #e6e6ff;
+    display: flex;
+    align-items: center;
+}
+
+.dp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-size: cover !important;
+    border-radius: 50%;
+    padding: 50px;
+    margin-left: 60px;
+    margin-right: 20px;
+    border: 3px solid #fff;
+    transition: .2s;
+}
+
+.ovarlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    height: 40px;
+    width: 40px;
+    padding: 50px;
+    border-radius: 50%;
+    background: #3c3c3c69;
+    color: #fff;
+    cursor: pointer;
+}
+
+.dp:hover .ovarlay {
+    visibility: visible;
+}
+
+.sep {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding-right: 60px;
+}
+
+.count {
+    padding: 22px 0;
+    padding-right: 60px;
+}
+
+.text {
+    font-weight: 600;
+    font-size: 60px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.name {
+    font-size: 35px;
+}
+
+.pass {
+    background-color: #827ffe;
+    color: #fff;
+}
+
+.mail,
+.time {
+    font-size: 13px;
+    color: #6f6f6f;
+}
+
+#modal-container {
+    position: fixed;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+}
+
+#modal-container.four {
+    z-index: 0;
+    transform: scale(1);
+}
+
+#modal-container.four .modal-background {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#modal-container.four .modal-background .modal {
+    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four+.content {
+    z-index: 1;
+    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out .modal-background {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out .modal-background .modal {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out+.content {
+    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container .modal-background {
+    display: flex;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-container .modal-background .modal {
+    background: white;
+    padding: 10px 30px;
+    height: 300px;
+    width: 400px;
+    display: inline-block;
+    border-radius: 5px;
+    position: relative;
+}
+
+.option-b {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: #fff;
+    padding: 10px 30px;
+    box-shadow: 0px 0px 15px -8px rgba(0, 0, 0, 0.75), 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+#submit {
+    background: #827ffe;
+    color: #fff;
+    margin-left: 10px;
+    transition: .2s;
+}
+
+#submit:hover {
+    background-color: #5b59bf;
+}
+
+@keyframes blowUpModal {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes blowUpModalTwo {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes blowUpContent {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    99.9% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes blowUpContentTwo {
+    0% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#picture {
+    display: none;
+}
+
+.divider {
+    position: relative;
+    height: 35px;
+    margin-top: 20px;
+}
+
+.line {
+    display: block;
+    height: 2px;
+    background: #b9b9fd;
+}
+
+.texts {
+    position: absolute;
+    top: -18px;
+    left: 37px;
+    font-size: 25px;
+    padding: 0 20px;
+    background: white;
+    color: #403866;
+}
+
+.no_blog {
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: aliceblue;
+    border-radius: 10px;
+}
+
+.no_blog h1 {
+    color: #a8c6e0;
+}

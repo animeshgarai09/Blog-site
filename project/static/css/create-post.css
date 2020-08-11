@@ -1,0 +1,387 @@
+html.modal-active,
+body.modal-active {
+    overflow: hidden;
+}
+
+.form-con {
+    padding: 30px 0;
+}
+
+.image-con {
+    height: 170px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.image-con img {
+    border-radius: 10px 10px 0 0;
+}
+
+.login100-form-btn {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 62px;
+    background-color: #827ffe;
+    border-radius: 3px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+    background-color: #403866;
+}
+
+#picture {
+    display: none;
+}
+
+#file-pic {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    height: 24px;
+    background: no-repeat;
+    border: 1px solid #ffffff82;
+    border-radius: 5px;
+    font-size: 11px;
+    transition: .2s;
+}
+
+#file-pic i {
+    color: #f7f7f787;
+}
+
+#file-pic:hover {
+    background-color: #fff;
+}
+
+#file-pic:hover i {
+    color: #827ffe;
+}
+
+.option-b {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px 40px;
+    box-shadow: 0px 0px 15px -8px rgba(0, 0, 0, 0.75), 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.author {
+    display: flex;
+    align-items: center;
+}
+
+.auth-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #6f6f6f;
+}
+
+.dp {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-size: cover !important;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#submit-post {
+    background: #827ffe;
+    color: #fff;
+    border-radius: 5px;
+    transition: .2s;
+    margin-left: 10px;
+}
+
+#submit-post:hover {
+    background-color: #5b59bf;
+}
+
+button.post {
+    width: 15rem;
+    height: 4rem;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+button.post .circle {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 4rem;
+    height: 4rem;
+    background: #827ffe;
+    border-radius: 2.625rem;
+}
+
+button.post .circle .icon {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+}
+
+button.post .circle .icon.arrow {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+button.post .circle .icon.arrow::before {
+    position: absolute;
+    content: '';
+    top: -0.3rem;
+    right: -0.5rem;
+    width: 0.825rem;
+    height: 0.825rem;
+    border-top: 0.2rem solid #fff;
+    border-right: 0.2rem solid #fff;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+button.post .button-text {
+    -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 1.2px;
+    text-align: center;
+}
+
+button:hover .circle {
+    width: 100%;
+}
+
+button:hover .circle .icon.arrow {
+    background: #fff;
+    -webkit-transform: translate(1rem, 0);
+    transform: translate(1rem, 0);
+}
+
+button:hover .button-text {
+    color: #fff;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+    top: 0;
+    padding: 50px 40px;
+    background: #0000005e;
+    color: #fff;
+    font-size: 15px;
+}
+
+.options .heading {
+    display: block;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+}
+
+#modal-container {
+    position: fixed;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 1;
+}
+
+#modal-container.four {
+    z-index: 0;
+    transform: scale(1);
+}
+
+#modal-container.four .modal-background {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#modal-container.four .modal-background .modal {
+    animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four+.content {
+    z-index: 1;
+    animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out .modal-background {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out .modal-background .modal {
+    animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out+.content {
+    animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container .modal-background {
+    display: flex;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    height: 100%;
+    text-align: start;
+    overflow-y: auto;
+}
+
+.content::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.content::-webkit-scrollbar {
+    width: 6px;
+    background-color: #fff;
+}
+
+.content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #b5b5b5;
+}
+
+#modal-container .modal-background .modal {
+    background: white;
+    padding: 40px 20px;
+    padding-top: 10px;
+    height: 85%;
+    width: 85%;
+    display: inline-block;
+    border-radius: 5px;
+    position: relative;
+    transition: .3s;
+}
+
+#modal-container.message .modal-background .modal {
+    padding: 10px;
+    height: 250px;
+    width: 300px;
+}
+
+#modal-container.message .modal-background .modal #pre-title,
+#modal-container.message .modal-background .modal #pre-short,
+#modal-container.message .modal-background .modal .content,
+#modal-container.message .modal-background .modal .option-b {
+    transition: .2s;
+    display: none;
+}
+
+#loader {
+    position: absolute;
+    top: -34px;
+    left: -8px;
+}
+
+#success {
+    position: absolute;
+    top: 0px;
+    left: -8px;
+    height: 235px;
+}
+
+@keyframes blowUpModal {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes blowUpModalTwo {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes blowUpContent {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    99.9% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes blowUpContentTwo {
+    0% {
+        transform: scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
